@@ -9,7 +9,6 @@ const CodeGenerator = function (code) {
 
   for (let i = 0; i < code.length; i++) {
     buffer[i] = code.charCodeAt(i);
-    console.log("buffer: " + buffer[i]);
   }
 
   for (let index1 = 0; index1 < 256; ++index1) {
@@ -19,19 +18,13 @@ const CodeGenerator = function (code) {
       else num >>>= 1;
     }
     numArray[index1] = num;
-    console.log(num);
   }
 
   for (let index1 = 0; index1 < buffer.length; ++index1) {
-    console.log("_crc: " + _crc);
     let index2 = (_crc & 255) ^ buffer[index1];
-    console.log("index2: " + index2);
     _crc >>>= 8;
-    console.log("_crc: " + _crc);
     _crc ^= numArray[index2];
-    console.log("_crc: " + _crc);
   }
-  console.log(_crc);
   return finalCal(_crc);
 };
 
@@ -44,14 +37,7 @@ const finalCal = function (crc){
   codeArr[3] = num >>> 24 & 255;
   // Javascript is treating your final result as a signed number. You can fix this by ending your bitwise operation with codeArr >>> 0, which will force the sign bit to be 0
   var byte2Uint = (codeArr[0] | codeArr[1]<<8 | codeArr[2] << 16 | codeArr[3] << 24) >>> 0;
-  console.log(codeArr[0]);
-  console.log(codeArr[1]);
-  console.log(codeArr[2]);
-  console.log(codeArr[3]);
-  console.log(codeArr);
-  console.log(byte2Uint);
   let hexString = byte2Uint.toString(16, 8).toUpperCase();
-  console.log(hexString);
   return hexString;
 };
 
