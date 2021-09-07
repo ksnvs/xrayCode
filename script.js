@@ -35,7 +35,7 @@ const finalCal = function (crc){
   codeArr[1] = num >>> 8 & 255;
   codeArr[2] = num >>> 16 & 255;
   codeArr[3] = num >>> 24 & 255;
-  // Javascript is treating your final result as a signed number. You can fix this by ending your bitwise operation with codeArr >>> 0, which will force the sign bit to be 0
+  // Javascript is treating your final result as a signed number. You can fix this by ending your bitwise operation with codeArr >>> 0, which will force the sign bit to be 0.
   var byte2Uint = (codeArr[0] | codeArr[1]<<8 | codeArr[2] << 16 | codeArr[3] << 24) >>> 0;
   let hexString = byte2Uint.toString(16, 8).toUpperCase();
   return hexString;
